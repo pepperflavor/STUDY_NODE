@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const Cart = require('../models/cart')
 
 
 exports.getProducts = (req, res, next) => {
@@ -43,7 +44,10 @@ exports.getCart = (req, res, next) =>{
 
 exports.addCart = (req, res, next) =>{
   const productId = req.body.productId;
-  console.log(productId);
+  // product 파일에서 갖고온 product
+  Product.findById(productId, (product) =>{
+    Cart.addProduct(productId, product.price)
+  })
   res.redirect('/cart');
 }
 
