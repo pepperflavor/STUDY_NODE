@@ -7,7 +7,7 @@ class User extends Sequelize.Model{
         // 써두기만 한상태
         // 아직 실행을 하지 않았음 나중에 index.js에서 호출하는 이유
         return super.init({ 
-            id: {
+            user_id: {
                 type : Sequelize.INTEGER,
                 autoIncrement: true,
                 allowNull: false,
@@ -30,9 +30,9 @@ class User extends Sequelize.Model{
         })
     }
 
-    static associate(db){
-        db.User.hasMany(db.Post, { foerignKey: "user_id", sourceKey: "id"})
-    }
+    // static associate(db){
+    //     db.User.hasMany(db.Post, { foerignKey: "user_id", sourceKey: "id"})
+    // }
 }
 
 module.exports = User;

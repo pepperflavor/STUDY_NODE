@@ -9,6 +9,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 // 모델정의한것들 갖고오기
 const User = require('./user.model');
+const Borad = require('./board.model');
 
 // 위에서 생성한  models:{} 빈 객체안에 User 클래스로 지정해둔 형태를 넣어주는 역할
 User.init(sequelize); 
@@ -17,7 +18,7 @@ const db = {};
 
 // console.log("@@@@  ", sequelize); => models :{} 안에 models: { User: User }, 찍힌게 보임!
 
-// db에 넣어주는 이유는 e다른곳에서 꺼내쓸때 편하게 사용하려고,
+// db에 넣어주는 이유는 다른곳에서 꺼내쓸때 편하게 사용하려고,
 db.User = User;
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
@@ -38,6 +39,6 @@ db.Sequelize = Sequelize;
 */
 
 // 관계형 맺어주는 함수 사용
-User.associate(db);
+//User.associate(db);
 
 module.exports = db;
