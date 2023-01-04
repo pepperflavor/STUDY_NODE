@@ -17,7 +17,6 @@ exports.getIndex = (req, res, next) =>{
     // 독스 참고
     Board.findAll().then(boards => {
         res.renser('board/index', {
-            
         })
 
     }).catch( err => {

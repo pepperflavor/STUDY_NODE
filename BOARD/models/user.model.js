@@ -21,9 +21,9 @@ class User extends Sequelize.Model{
                 type : Sequelize.STRING(20),
                 allowNull: false
             },
-            creator: {
-                type : Sequelize.TINYINT, 
-                allowNull: false
+            isCreator: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
             }
         }, {
             sequelize
