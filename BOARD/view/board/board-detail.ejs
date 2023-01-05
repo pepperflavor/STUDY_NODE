@@ -1,0 +1,19 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main class="centered">
+        <h1><%= board.title %></h1>
+        <hr>
+        <div>
+            <img src="https://thumb.mt.co.kr/06/2021/02/2021020108533920872_1.jpg/dims/optimize/" alt="">
+        </div>
+        <p><%= board.content %></p>
+        <form action="/board/delete">
+            <button class="btn" type="submit">삭제하기</button>
+            <input type="hidden" name="boardId" value="<%= board.id %>">
+        </form>
+
+    </main>
+    <%- include('../includes/end.ejs')%>

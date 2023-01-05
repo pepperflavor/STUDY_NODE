@@ -7,4 +7,4 @@ const router = express.Router();
 
 
 
-router.get('/add-user', userController)
+//router.get('/add-user', userController.)

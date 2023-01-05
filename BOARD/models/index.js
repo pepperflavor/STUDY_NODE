@@ -13,6 +13,7 @@ const Borad = require('./board.model');
 
 // 위에서 생성한  models:{} 빈 객체안에 User 클래스로 지정해둔 형태를 넣어주는 역할
 User.init(sequelize); 
+Borad.init(sequelize); 
 
 const db = {};
 
@@ -20,9 +21,11 @@ const db = {};
 
 // db에 넣어주는 이유는 다른곳에서 꺼내쓸때 편하게 사용하려고,
 db.User = User;
+db.Borad = Borad;
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+module.exports = db;
 // 하지만 js는 구조분해가 잘되어있어서 아래처럼 사용해도 된다. 
 /*
   console.log({}==={}) // false
@@ -41,4 +44,3 @@ db.Sequelize = Sequelize;
 // 관계형 맺어주는 함수 사용
 //User.associate(db);
 
-module.exports = db;
