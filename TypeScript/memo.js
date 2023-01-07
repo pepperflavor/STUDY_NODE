@@ -51,3 +51,5 @@ console.log(v);
 const b = new B()
 console.log(b)
 console.log(b.bbb())
+
+
