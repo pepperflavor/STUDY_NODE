@@ -11,6 +11,30 @@
     적지 않아도 implements를 하면 읽기전용 속성을 가진 프로퍼티임을 인지하고
     클래스 밖에서 다시 해당 변수값을 초기화할때 에러를 띄워준다.
 
-    git edit
 */
+
+interface Animal{
+    readonly name: string;
+
+    cry(how: string): void;
+}
+
+class Cat implements Animal{
+    name: string;
+
+    constructor(n: string){
+        this.name = n;
+    }
+
+    cry(how: string): void {
+        console.log( this.name + " 은 이렇게 울어요 " + how);
+    }
+}
+
+let animal1: Animal; // 타입지정
+
+animal1 = new Cat("애옹쓰");
+
+// 다음과같이 다시 readonly 속성을 가진 프로퍼티를 초기화하려고 하면 오류가 난다
+//animal1.name = "작은 애옹쓰"; 
 
