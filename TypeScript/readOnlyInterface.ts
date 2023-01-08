@@ -35,6 +35,6 @@ let animal1: Animal; // 타입지정
 
 animal1 = new Cat("애옹쓰");
 
-// 다음과같이 다시 readonly 속성을 가진 프로퍼티를 초기화하려고 하면 오류가 난다
-//animal1.name = "작은 애옹쓰"; 
+// 다음과 같이 다시 readonly 속성을 가진 프로퍼티를 초기화하려고 하면 오류가 난다
+// animal1.name = "작은 애옹쓰"; 
 
