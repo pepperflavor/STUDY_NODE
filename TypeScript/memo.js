@@ -39,6 +39,7 @@ class A extends B{
     }
 }
 
+
 const v = A.init()
 console.log(v);
 
