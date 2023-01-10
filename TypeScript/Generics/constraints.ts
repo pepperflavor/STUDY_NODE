@@ -9,7 +9,6 @@ function genericMerge3<T extends object, U extends object>(objA: T, objB: U) {
     return Object.assign(objA, objB);
 }
 
-
 /*
     이렇게 쓰면 length에 에러가뜬다 그래서 타입 따로 지정해주기
 
