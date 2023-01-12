@@ -14,7 +14,7 @@ function addTemplat2(msg: string, hookId: string){
     return function(constructor: any){
         console.log(' 템플릿 랜더링 '); // 3
         const hookEl = document.getElementById(hookId);
-        const mypet = new constructor(); // 인스턴스화 pers3.name 출력값이 'Max'인걸 보니 아마 클래스 인스턴스화인듯
+        const mypet = new constructor(); // 4 인스턴스화 pers3.name 출력값이 'Max'인걸 보니 아마 클래스 인스턴스화인듯
         if(hookEl){
             hookEl.innerHTML = msg;
             hookEl.querySelector('h1')!.textContent = mypet.name // 절대 null이 아니고
@@ -58,7 +58,7 @@ console.log(mydog);
         }
     }
     저희집 강아지를 소개합니다.
-    인스턴스화 한것 출력 : 
+    인스턴스화 한것 출력 :   
     Pet {name: '쿠키'}
     
 
