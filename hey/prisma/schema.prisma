@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model user{
+  id Int @default(autoincrement()) @id
+  user_email String @unique @db.VarChar(500)
+  user_pwd String @db.VarChar(50)
+  user_grade Int @default(0)
+  user_wallet String @unique
+  musiccarts musicCart[]
+}
+
+model music{
+  id Int @default(autoincrement()) @id
+  music_title String @db.VarChar(50)
+  music_lyricist String 
+  music_composer String 
+  music_singer String
+  music_category Int
+  music_description String
+  music_m_carts musicCart[]
+}
+
+model musicFile{
+  id Int @default(autoincrement()) @id
+  music_file_path String 
+}
+
+model musicCart{
+  id Int @default(autoincrement()) @id
+  user_cart_ids user @relation(fields: [user_cart_id],references: [id])
+  user_cart_id Int 
+  music_ids music @relation(fields: [ music_id], references: [id])
+  music_id Int
+}
