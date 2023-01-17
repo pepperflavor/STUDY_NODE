@@ -11,35 +11,114 @@ datasource db {
 }
 
 
-model user{
-  id Int @default(autoincrement()) @id
+model User{
+  user_no Int @default(autoincrement()) @id
   user_email String @unique @db.VarChar(500)
   user_pwd String @db.VarChar(50)
+  user_nickname String @db.VarChar(30)
   user_grade Int @default(0)
+  user_streaming DateTime
   user_wallet String @unique
-  musiccarts musicCart[]
+  musiccarts MusicCart[]
+  shopcarts Cart[]
 }
 
-model music{
-  id Int @default(autoincrement()) @id
+//====  펀딩 관련 테이블
+
+model Shinchunghada{
+  shin_no Int @default(autoincrement()) @id
+  shin_amount Int
+  shin_nft_amount Int
+  shin_cover String
+  shin_period DateTime
+  shin_category String
+  shin_ispermit Boolean
+  shin_creator_ca String
+  funding Funding[]
+  singer Singer[]
+  composer Composer[]
+  lyricist Lyricist[]
+}
+
+
+model Funding{
+  fund_no Int @default(autoincrement()) @id
+  fund_state Int @default(0)
+  ifFundingOpen Shinchunghada @relation(fields: [shin_no], references: [shin_no])
+  shin_no Int @unique
+}
+
+model Singer{
+  sing_no Int @default(autoincrement()) @id
+  sing_name String
+  sing_profile String?
+  fundingID Shinchunghada @relation(fields: [shin_no], references: [shin_no])
+  shin_no Int @unique
+}
+
+model Composer{
+  com_no Int @default(autoincrement()) @id
+  com_name String
+  com_profile String?
+  fundingID Shinchunghada @relation(fields: [shin_no], references: [shin_no])
+  shin_no Int @unique
+}
+
+model Lyricist{
+  lyric_no Int @default(autoincrement()) @id
+  lyric_name String
+  lyric_profile String?
+  fundingID Shinchunghada @relation(fields: [shin_no], references: [shin_no])
+  shin_no Int @unique
+}
+
+/////==== 가수 작곡가 작사가 테이블이랑 스트리밍 테이블이랑 연관성 X ===================
+
+//==== 스트리밍 관련 테이블
+
+model Music{
+  music_no Int @default(autoincrement()) @id
   music_title String @db.VarChar(50)
   music_lyricist String 
   music_composer String 
   music_singer String
   music_category Int
   music_description String
-  music_m_carts musicCart[]
+  music_isfunding Boolean?
+  music_m_carts MusicCart[]
+  musicFilePath MusicFile[]
 }
 
-model musicFile{
-  id Int @default(autoincrement()) @id
-  music_file_path String 
+model MusicFile{
+  mf_no Int @default(autoincrement()) @id
+  mf_path String 
+  musicnumber Music @relation(fields: [music_no], references: [music_no])
+  music_no Int
 }
 
-model musicCart{
-  id Int @default(autoincrement()) @id
-  user_cart_ids user @relation(fields: [user_cart_id],references: [id])
-  user_cart_id Int 
-  music_ids music @relation(fields: [ music_id], references: [id])
+model MusicCart{
+  mc_no Int @default(autoincrement()) @id
+  user_cart_ids User @relation(fields: [user_mc_id],references: [user_no])
+  user_mc_id Int 
+  musicIds Music @relation(fields: [music_id], references: [music_no])
   music_id Int
 }
+
+
+///=====굿즈shop 관련 테이블
+
+model Product{
+  product_no Int @default(autoincrement()) @id
+  product_price Int 
+  product_descrip String 
+  cartIds Cart[]
+}
+
+model Cart{
+  cart_no Int @default(autoincrement()) @id
+  user_number User @relation(fields: [user_no], references: [user_no])
+  user_no Int
+  productIds Product @relation(fields: [product_no], references: [product_no])
+  product_no Int
+}
+
