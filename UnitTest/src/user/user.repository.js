@@ -6,9 +6,24 @@ class UserRepository{
     async addUser(payload){
         try {
             const user = await this.User.create(payload, {raw: true})
-            
+            return user
         } catch (error) {
-            
+            throw new Error(e)
+        }
+    }
+
+    async getUserById(userid){
+        try {
+            const user = await this.User.findOne({
+                raw : true,
+                where:{
+                    userid,
+                },
+            })
+
+            return user
+        } catch (e) {
+            throw new Error(e)
         }
     }
 }
