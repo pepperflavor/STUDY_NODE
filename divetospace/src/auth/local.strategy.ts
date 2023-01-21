@@ -7,6 +7,9 @@ import { AuthService } from './auth.service';
 import { User } from '@prisma/client';
 
 // 로컬 Passport 로컬 인증 전략
+
+// 여기가 토큰이 썩었는지 확인해주는 부분
+
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
 	constructor(private authService: AuthService) {
