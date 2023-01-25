@@ -16,38 +16,37 @@ model User{
   user_email String @unique @db.VarChar(500)
   user_pwd String @db.VarChar(50)
   user_nickname String @db.VarChar(30)
-  user_grade Int @default(0)
-  user_streaming Int @default(0)
+  user_grade Int @default(1)
   user_wallet String @unique
+  user_email_token String? @unique
   shopcarts Cart[]
 }
 
 //====  펀딩 관련 테이블
-
 model Shinchunghada{
   shin_no Int @default(autoincrement()) @id
   shin_amount Int
-  shin_nft_amount Int
+  shin_nft_totalbalance Int
   shin_cover String
   shin_opendate	DateTime
   shin_description String
   shin_category String
   shin_ispermit Boolean
-  shin_creator_ca String
+  shin_creator_address String
   funding Funding[]
   singer Singer[]
   composer Composer[]
   lyricist Lyricist[]
 }
 
-
+// fund_state: 1 - 펀딩 중 2-펀딩성공 3-펀딩실패
 model Funding{
   fund_no Int @default(autoincrement()) @id
-  fund_state Int @default(0)
+  fund_state Int @default(1)
   ifFundingOpen Shinchunghada @relation(fields: [shin_no], references: [shin_no])
   shin_no Int @unique
 }
-
+ 
 model Singer{
   sing_no Int @default(autoincrement()) @id
   sing_name String
@@ -70,7 +69,6 @@ model Lyricist{
 }
 
 /////==== 가수 작곡가 작사가 테이블이랑 스트리밍 테이블이랑 연관성 X ===================
-
 //==== 스트리밍 관련 테이블
 
 model Music{
@@ -94,7 +92,6 @@ model MusicFile{
 
 
 ///=====굿즈shop 관련 테이블
-
 model Product{
   product_no Int @default(autoincrement()) @id
   product_price Int 
@@ -104,7 +101,7 @@ model Product{
 
 model Cart{
   cart_no Int @default(autoincrement()) @id
-  user_number User @relation(fields: [user_no], references: [user_no])
+  user_IDnumber User @relation(fields: [user_no], references: [user_no])
   user_no Int
   productIds Product @relation(fields: [product_no], references: [product_no])
   product_no Int

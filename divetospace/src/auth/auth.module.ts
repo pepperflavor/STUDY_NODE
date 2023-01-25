@@ -6,11 +6,12 @@ import { LocalStrategy } from './local.strategy';
 import { AuthController } from './auth.controller';
 import {JwtModule} from '@nestjs/jwt'
 import { JwtStrategy } from './jwt.strategy';
-import { ConfigService } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { EmailModule } from '../email/email.module';
 
 
-@Module({ // .env에 들어있는 시크릿키 어떻게 뽑아와야 하는지 모르겠다....
-  imports:[UserModule, PassportModule, JwtModule.register({ secret: jwtConstants.secret, signOptions: { expiresIn: '60s'} })],
+@Module({ // JwtModule.register({ secret: jwtConstants.secret, signOptions: { expiresIn: '60s'} })
+  imports:[UserModule, PassportModule , JwtModule, EmailModule], // service에서 직접 토큰 유지시간 지정해줘서 지움
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService]

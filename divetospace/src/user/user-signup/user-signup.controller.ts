@@ -1,14 +1,16 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { userSignUpDto } from '../user_dto/user-sign-up.dto';
+import { CreateUserDto } from '../user_dto/create-user.dto';
 import { UserSignupService } from './user-signup.service';
 import { User } from '@prisma/client';
 
-@Controller('user-signup')
+
+@Controller('user_signup')
 export class UserSignupController {
     constructor(private readonly UserSignupService: UserSignupService){ }
 
+    // 회원가입
     @Post()
-    async postSignup(@Body() userSignUpData: userSignUpDto):Promise<User>{
-        return await this.UserSignupService.signUP(userSignUpData)
+    async createUser(@Body() userSignUpData: CreateUserDto):Promise<User>{
+        return await this.UserSignupService.signUP(userSignUpData);
     }
 }
