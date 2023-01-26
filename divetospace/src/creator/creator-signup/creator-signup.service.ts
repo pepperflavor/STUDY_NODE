@@ -28,6 +28,8 @@ export class CreatorSignupService {
        const newsignupForm = {...signupForm}
         // 첫번째인수 = 환경변수 키값, 두번째 기본값 넣어줄 수 있음
     const SORTNUM = this.config.get<number>('SORT_NUM'); //갖고오는건가
+    console.log(SORTNUM);
+    
     //process.env.SORT_NUM;
        if(existUser){// 가입가능한 유저라면
             // 입력받은 비밀번호 해시화해서 저장

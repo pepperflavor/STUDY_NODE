@@ -11,9 +11,20 @@ import { EmailModule } from '../email/email.module';
 
 
 @Module({ // JwtModule.register({ secret: jwtConstants.secret, signOptions: { expiresIn: '60s'} })
-  imports:[UserModule, PassportModule , JwtModule, EmailModule], // service에서 직접 토큰 유지시간 지정해줘서 지움
+  imports:[UserModule, PassportModule , EmailModule, ConfigModule, 
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get('JWT_SECRET'),
+        signOptions:{
+          expiresIn: `${configService.get('JWT_EXPIRATION_TIME')}s`
+        },
+      }),
+    }),
+  ], // service에서 직접 토큰 유지시간 지정해줘서 지움
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
-  exports: [AuthService]
+  exports: [AuthService, JwtModule]
 })
 export class AuthModule {}
