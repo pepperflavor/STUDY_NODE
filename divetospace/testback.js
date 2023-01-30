@@ -42,3 +42,61 @@
 // 요청 브라우저 요청때렷을때. 파이프 -> 가드 -> 인터셉터 -> 컨트롤러 -> 서비스 
 
 // 응답 콜스택에서 쌓였다가 서비스-> cor 빠진 결과값 -> 컨트롤러-> 인터셉터 이렇게 빠져나감
+
+
+// {
+//     "Version" : "2012-10-17",
+//     "Statement" : [
+//         {
+//             "Sid" : "AddMusicFile",
+//             "Effect" : "Allow",
+//             "Principal" : {"AWS" : "arn:aws:iam::295376149657:user/divetospace_music"},
+//             "Action" :[
+//                 "s3:GetObject",
+//                 "s3:GetBuketLocation",
+//                 "s3:ListBucket",
+//             ],
+//             "Resource": "arn:aws:s3:::divetospacemusic",
+//         }
+//     ]
+// }
+
+
+// {
+//     "Version" : "2012-10-17",
+//     "Statement" : [
+//         {
+//             "Sid" : "AddMusicFile",
+//             "Effect" : "Allow",
+//             "Principal" :"*",
+//             "Action" :[
+//                 "s3:GetObject",
+//                 "s3:PutObject",
+//                 "s3:GetBuketLocation",
+//                 "s3:ListBucket",
+//             ],
+//             "Resource": "arn:aws:s3:::divetospacemusic/*",
+//         }
+//     ]
+// }
+
+
+
+
+// 버킷 설정 권한 이렇게 해주기
+// {
+//     "Version": "2012-10-17",
+//     "Statement": [
+//         {
+//             "Sid": "AddMusicFile",
+//             "Effect": "Allow",
+//             "Principal": "*",
+//             "Action": [
+//                 "s3:PutObject",
+//                 "s3:GetObject",
+//                 "s3:DeleteObject"
+//             ],
+//             "Resource": "arn:aws:s3:::divetospacemusic/*"
+//         }
+//     ]
+// }

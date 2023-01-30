@@ -1,5 +1,4 @@
-import { Injectable, Body } from '@nestjs/common';
-import { HttpException } from '@nestjs/common/exceptions';
+import { Injectable, Body, HttpStatus, HttpException } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { userLoginDto } from '../user_dto/user-login.dto';
 import { PrismaService } from '../../prisma.service';
@@ -8,23 +7,24 @@ import { PrismaService } from '../../prisma.service';
 @Injectable()
 export class UserLoginService {
  
-    // PrismaService 이걸 지정해야하는게 아닌감 // PrismaClient
+    // PrismaService 이걸 지정해야하는게 아닌감 // PrismaClient 이었음 처음에
     constructor(private readonly prisma: PrismaService){}
 
     // 지갑주소로 유저 찾기(가입한 유저인지 확인)
-    // 특정유저
+    // 특정유저 찾아서 결과 return
     async findOne(userwallet: string): Promise<User>{
         try {
             const result = await this.prisma.user.findUnique({ where :{
                 user_wallet : userwallet,
                 },
             });
-            
             return result;
         } catch (error) {
-            throw new HttpException('아이디가 존재하지 않습니다.', 402); // 오류번호 수정예정   
+            throw new HttpException('아이디가 존재하지 않습니다.', HttpStatus.BAD_REQUEST); // 오류번호 수정예정   
         }
     }
+
+    
 }
 
     //====== AUTH에 로그인 새로 만듬
