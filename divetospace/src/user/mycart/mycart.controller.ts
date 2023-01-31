@@ -1,4 +1,6 @@
 import { Controller } from '@nestjs/common';
 
 @Controller('user-mycart')
-export class UserMycartController {}
+export class UserCartController {
+
+}

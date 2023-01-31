@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { AuthModule } from '../auth/auth.module';
 import { SignUpModule } from './signup/signup.module';
 import { LoginModule } from './login/login.module';
+import { MypageModule } from './mypage/mypage.module';
+import { MycartModule } from './mycart/mycart.module';
                                                                                                                                                                                                           
 
 // @Module({
@@ -11,7 +13,7 @@ import { LoginModule } from './login/login.module';
 //   exports: [UserLoginService, UserSignupService]
 // })
 @Module({
-  imports:[SignUpModule, LoginModule, AuthModule],
+  imports:[SignUpModule, LoginModule, AuthModule, MypageModule, MycartModule],
   controllers: [],
   providers: [],
   exports: []

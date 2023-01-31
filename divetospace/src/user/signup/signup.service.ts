@@ -28,6 +28,7 @@ export class SignupService {
                     data: newsignupForm // 이미 객체 라서 그래도 넣어도 된다
                 })
             }
+            console.log('회원가입 완료');
         } catch (e) {
             console.log('회원가입 오류');
             throw new Error(e)

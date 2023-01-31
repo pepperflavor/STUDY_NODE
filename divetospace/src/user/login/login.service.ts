@@ -1,4 +1,4 @@
-import { Injectable, Body, HttpStatus, HttpException } from '@nestjs/common';
+import { Injectable, Body, HttpStatus, HttpException, NotFoundException } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { userLoginDto } from '../user_dto/user-login.dto';
 import { PrismaService } from '../../prisma.service';

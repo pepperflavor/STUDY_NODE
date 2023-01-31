@@ -1,10 +1,12 @@
-import { HttpStatus, Injectable, HttpException } from '@nestjs/common';
+import { HttpStatus, Injectable, HttpException, UnauthorizedException } from '@nestjs/common';
 import { UserLoginService } from 'src/user/login/login.service';
 import { JwtService } from '@nestjs/jwt';
 import { userLoginDto } from 'src/user/user_dto/user-login.dto';
 import * as bcrypt from "bcrypt";
 import * as jwt from 'jsonwebtoken'
 import { ConfigService } from '@nestjs/config';
+import { CreatorLoginDto } from '../creator/creator_dto/creator-login.dto';
+import { User } from '@prisma/client';
 
 // 여기서 비밀번호 해시화 해줘야함
 @Injectable()
@@ -13,7 +15,7 @@ export class AuthService {
     constructor(private userService: UserLoginService, private readonly config: ConfigService){}
     // 최초 로그인
     // userWallet: string, enterPWD: string
-    async validateUser(loginForm: userLoginDto): Promise<any>{
+    async validateUser(loginForm: CreatorLoginDto): Promise<any>{
         try {
             // 동일한 지갑 소유주가 있는지 확인
             const user = await this.userService.findOne(loginForm.user_wallet).then((e)=>{
@@ -40,5 +42,19 @@ export class AuthService {
         // return {access_token: this.jwtService.sign(payload)} 
 
         // expiresIn : 토큰 살아있는 시간
+    }
+
+    // 토큰이 우리서버에서 발급한게 맞는지 확인
+    // 지갑주소랑 이메일로 페이로드 생성해 줬었다
+    isVerifyToken(jwtString: string){
+        try {
+            const payload = jwt.verify(jwtString, this.config.get('JWT_SECRET')) as (jwt.JwtPayload | string) & User;
+            const {user_wallet, user_email} = payload;
+
+            return { user_wallet: user_wallet, user_email: user_email}
+
+        } catch (error) {
+            throw new UnauthorizedException();
+        }
     }
 }
