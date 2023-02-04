@@ -12,9 +12,21 @@ export class UserLoginService {
 
     // 지갑주소로 유저 찾기(가입한 유저인지 확인)
     // 특정유저 찾아서 결과 return
-    async findOne(userwallet: string): Promise<User>{
+    findOne(userwallet: string): Promise<User|null>{
         try {
-            const result = await this.prisma.user.findUnique({ where :{
+            const result = this.prisma.user.findUnique({ where :{
+                user_wallet : userwallet,
+                },
+            });
+            return result;
+        } catch (error) {
+            throw new HttpException('아이디가 존재하지 않습니다.', HttpStatus.BAD_REQUEST); // 오류번호 수정예정   
+        }
+    }
+
+    getUser(userwallet: string): Promise<User>{
+        try {
+            const result = this.prisma.user.findUnique({ where :{
                 user_wallet : userwallet,
                 },
             });

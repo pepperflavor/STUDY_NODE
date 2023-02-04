@@ -40,8 +40,6 @@ export class AuthService {
         })
         // 로그인 토큰 발급
         // return {access_token: this.jwtService.sign(payload)} 
-
-        // expiresIn : 토큰 살아있는 시간
     }
 
     // 토큰이 우리서버에서 발급한게 맞는지 확인

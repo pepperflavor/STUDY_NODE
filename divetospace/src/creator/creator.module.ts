@@ -4,11 +4,15 @@ import { AuthModule } from 'src/auth/auth.module';
 import { CreatorLoginModule } from './login/login.module';
 import { UserModule } from '../user/user.module';
 import { ShinchungModule } from './shinchung/shinchung.module';
-import { OpenfundingModule } from './openfunding/openfunding.module';
+//import { OpenfundingModule } from './openfunding/openfunding.module';
+import { HttpModule } from '@nestjs/axios';
+import { HttpService } from '@nestjs/axios';
 
-
+// OpenfundingModule
 @Module({ 
-  imports: [CreatorSignupModule, AuthModule, CreatorLoginModule, UserModule, ShinchungModule, OpenfundingModule],
+  imports: [CreatorSignupModule, AuthModule, CreatorLoginModule, UserModule, ShinchungModule, HttpModule,
+    
+  ],
   controllers: [],
   providers: []
 })

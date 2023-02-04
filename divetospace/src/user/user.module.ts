@@ -12,8 +12,9 @@ import { MycartModule } from './mycart/mycart.module';
 //   providers: [AuthService ,UserLoginService, UserSignupService, UserMycartService, UserMypageService, PrismaService, UserLogoutService],
 //   exports: [UserLoginService, UserSignupService]
 // })
+// MypageModule
 @Module({
-  imports:[SignUpModule, LoginModule, AuthModule, MypageModule, MycartModule],
+  imports:[SignUpModule, LoginModule, AuthModule, MycartModule],
   controllers: [],
   providers: [],
   exports: []

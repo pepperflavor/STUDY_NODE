@@ -11,6 +11,7 @@ import { UploadsModule } from './uploads/uploads.module';
 import { LoggerMiddleware } from './middlewears/logger.middleware';
 import { EmailModule } from './email/email.module';
 import { PrismaService } from './prisma.service';
+import { AdminModule } from './admin/admin.module';
 
 
 //  AdminModule,
@@ -20,11 +21,11 @@ import { PrismaService } from './prisma.service';
   //   isGlobal: true, // 전체적으로 사용하기 위해
   //   envFilePath: `${process.env.NODE_ENV}.env`
   // }), ],
-  imports: [UserModule, CreatorModule,
+  imports: [UserModule, CreatorModule, AdminModule, EmailModule,
     ConfigModule.forRoot({
       isGlobal: true, // 전체적으로 사용하기 위해
       envFilePath: `${process.env.NODE_ENV}.env`
-    })
+    }),   
   ],
   controllers: [],
   providers: [
@@ -33,7 +34,8 @@ import { PrismaService } from './prisma.service';
       provide : APP_PIPE,
       useClass: ValidationPipe,
     },
-    PrismaService
+    PrismaService,
+    
   ],
 })
 

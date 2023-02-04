@@ -1,3 +1,6 @@
+// 타협안
+
+
 // import { Injectable } from '@nestjs/common';
 // import { PrismaService } from '../../prisma.service';
 // import { ConfigService } from '@nestjs/config';
@@ -8,7 +11,6 @@
 // import fs from 'fs';
 // import path from 'path';
 // import { CreatorShinChungDto } from '../creator_dto/shinchung.dto';
-// import { Shinchunghada } from '@prisma/client';
 
 // @Injectable()
 // export class OpenfundingService {
@@ -16,56 +18,12 @@
 
 //     // 신청아이디 받아서 db에서 추출한다음 JSON으로 변환하기
 //     // 아이디만 받아서 db에서 꺼내자 //, openData: CreatorShinChungDto
-//     async openFunding(shinNo: number):Promise<Shinchunghada>{
+//     async openFunding(shinNo: number){
 //         // result => object 일거임
-//         const result = await this.prisma.shinchunghada.findMany({
-//             include:{
-//                 composer:{
-//                     select:{
-//                         com_name: true
-//                     }
-//                 },
-//                 lyricist: {
-//                     select: {
-//                         lyric_name: true
-//                     }
-//                 },
-//                 singer: {
-//                     select: {
-//                         sing_name: true
-//                     }
-//                 },
-//             }
-//         });
-//        // const resultObj = JSON.parse(result);
-
-//         // const imgURL = Object.values(result).filter
-//         // for (const [key, value] of Object.entries(result)){
-//         // }
-
-//         //Object.entries(result.filter(([shin_cover, ]) => typeof(shin_cover) === 'string'))
-//         /* result 값
-//         {
-//             "id": 9
-//             "name": "Sabelle",
-//             "email": "sabelle@prisma.io",
-//             "profileViews": 90,
-//             "role": "USER",
-//             "profile": null,
-//             "coinflips": [],
-//             "posts":[
-//                 {
-//                     "title":"Getting started with Azure Functions"
-//                 },
-//                 {
-//                     "title":"All about databases"
-//                 }
-//             ]
-//             }
-//         */
-
-//         // 여기서 커버사진 받은거 바로 S3에 배포할까?
-//         const imgURL =  result; // 이미지 url만 뽑기
+//         const result = this.prisma.shinchunghada.findUnique({
+//             where:{ shin_no : shinNo }
+//         })
+//         const imgURL = (await result).shin_cover; // 이미지 url만 뽑기
 
 //         // db에서 뽑은 객체 JSON으로 변환하기
 //         // stringify json 문자열로 바꿔줌
@@ -73,7 +31,7 @@
 //         const metaData = JSON.stringify(result);
 
 //         // db에서 뽑은 객체값 그대로 넣음
-//         //this.getMetaData(result, shinNo);
+//         this.getMetaData(await result, shinNo);
 
 
 //         console.log('@@@@@');
@@ -83,6 +41,8 @@
 
 //          // metaDATA 잘 저장됐는지 확인하기
 //          this.readMetaJson(shinNo);
+
+
 
 //     }
 
@@ -116,8 +76,9 @@
 //     }
 
 //     // 이미지 경로 ipfs:// 로 바꾼다음에 저장해여함!!!
-//     // 커버사진 IPFS로 올리고 CID 받기
-//     // name : db에 저장한 id: 숫자 값이지만 string d으로 저장되어야 하기때문에 string
+    
+//         // 커버사진 IPFS로 올리고 CID 받기
+//         // name : db에 저장한 id: 숫자 값이지만 string d으로 저장되어야 하기때문에 string
 //         async getMetaData(shinchungForm: CreatorShinChungDto, shinNo: number){
 //             const name = shinNo.toString(); // db에서 뽑은 값이 숫자인데 문자열을 넣어줘야함
 //             const description = shinchungForm.shin_description;
@@ -141,7 +102,6 @@
 //         }
 
 //         // 이미지 파일 CID얻어오는 함수
-//         // 리턴으로 IPFS에 올린 이미지 주소 받아오기
 //         async fileFromPath(imgURL: string) {
 //             const content = await fs.promises.readFile(imgURL);
 //             const type = mime.getType(imgURL);

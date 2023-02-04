@@ -1,9 +1,9 @@
-// import { Module } from '@nestjs/common';
-// import { AdminShowfundlistController } from './admin-showfundlist/admin-showfundlist.controller';
-// import { AdminShowfundlistService } from './admin-showfundlist/admin-showfundlist.service';
+import { Module } from '@nestjs/common';
+import { MypageModule } from './mypage/mypage.module';
 
-// @Module({
-//   controllers: [AdminShowfundlistController],
-//   providers: [AdminShowfundlistService]
-// })
-// export class AdminModule {}
+@Module({
+    imports: [MypageModule],
+    controllers: [],
+    providers: []
+})
+export class AdminModule {}
