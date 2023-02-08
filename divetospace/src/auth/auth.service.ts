@@ -7,6 +7,7 @@ import * as jwt from 'jsonwebtoken'
 import { ConfigService } from '@nestjs/config';
 import { CreatorLoginDto } from '../creator/creator_dto/creator-login.dto';
 import { User } from '@prisma/client';
+// 지갑 바꿨을때 토큰초기화
 
 // 여기서 비밀번호 해시화 해줘야함
 @Injectable()

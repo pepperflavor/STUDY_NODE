@@ -21,4 +21,10 @@ export class MypageController {
         const adminSelectID = parseInt(fundingID);
         return await this.mypageService.updateReject(adminSelectID);
     }
+
+    @Get('/mypage/:id')
+    async getOneFunding(@Param('id') fundingID: string){
+        const adminSelectID = parseInt(fundingID);
+        return await this.mypageService.getOneFundData(adminSelectID);
+    }
 }

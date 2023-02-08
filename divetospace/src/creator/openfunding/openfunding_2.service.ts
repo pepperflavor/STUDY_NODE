@@ -32,7 +32,6 @@ export class OpenfundingService {
 
         this.getImageCID(imgURL);
 
-
         console.log('@@@@@');
         console.log(metaData);
          // JSON으로 변환한 메타데이터 파일로 저장하기
@@ -40,8 +39,6 @@ export class OpenfundingService {
 
          // metaDATA 잘 저장됐는지 확인하기
          this.readMetaJson(shinNo);
-
-
     }
 
     // 파일저장해주기 // writeFileSync는 예외를 try{} catch{} 로 처리해줘야함

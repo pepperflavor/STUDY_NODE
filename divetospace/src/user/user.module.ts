@@ -6,12 +6,7 @@ import { MypageModule } from './mypage/mypage.module';
 import { MycartModule } from './mycart/mycart.module';
                                                                                                                                                                                                           
 
-// @Module({
-//   imports:[AuthModule],
-//   controllers: [UserLoginController, UserSignupController, UserMycartController, UserMypageController, UserLogoutController],
-//   providers: [AuthService ,UserLoginService, UserSignupService, UserMycartService, UserMypageService, PrismaService, UserLogoutService],
-//   exports: [UserLoginService, UserSignupService]
-// })
+
 // MypageModule
 @Module({
   imports:[SignUpModule, LoginModule, AuthModule, MycartModule],

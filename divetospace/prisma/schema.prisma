@@ -27,6 +27,7 @@ model User{
 // shin_ispermit 1: 심사대기 2: 심사완료(승인) 3: 반려
 model Shinchunghada{
   shin_no Int @default(autoincrement()) @id
+  shin_title String @unique @db.Char(20)
   shin_amount Int
   shin_nft_totalbalance Int
   shin_cover String
@@ -34,7 +35,7 @@ model Shinchunghada{
   shin_description String
   shin_category String
   shin_ispermit Int @default(1)
-  shin_creator_address String @unique @db.Char(64)
+  shin_creator_address String @db.Char(64)
   funding Funding[]
   singer Singer[]
   composer Composer[]

@@ -3,11 +3,11 @@ import { VerifyEamilDto } from '../../email/verifyEamil.dto';
 import { CreatorSignupService } from './signup.service';
 import { CreateUserDto } from '../../user/user_dto/create-user.dto';
 
+
 @Controller('creator')
 export class CreatorSignupController {
 
     constructor(private readonly creatorService : CreatorSignupService){}
-
     // 크리에이터 회원가입
     @Post('/signup')
     async createCreator(@Body() creatorLoginForm: CreateUserDto): Promise<void>{

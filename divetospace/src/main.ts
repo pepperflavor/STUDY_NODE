@@ -21,11 +21,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   dotenv.config({path: path.join(__dirname, './.env-local')});
   app.useGlobalPipes(
-    new ValidationPipe({
+    new ValidationPipe({ 
       transform: true 
     })
   ); // validation 전역설정
-  const PORT = process.env.PORT || 3000; // .env에서 불러온다!
+  const PORT = process.env.PORT // .env에서 불러온다!
   await app.listen(PORT);
   console.log(`PORT NUM : ${PORT}`);
   console.log(process.env.NODE_ENV);
