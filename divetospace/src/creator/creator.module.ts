@@ -10,10 +10,11 @@ import { HttpService } from '@nestjs/axios';
 import { UploadsModule } from '../file-s3/uploads/uploads.module';
 import { OpenfundingModule } from './openfunding/openfunding.module';
 import { RedisCacheModule } from 'src/cache/cache.module';
+import { MypageModule } from './mypage/mypage.module';
 
 // OpenfundingModule
 @Module({ 
-  imports: [CreatorSignupModule, AuthModule, CreatorLoginModule, UserModule, ShinchungModule, HttpModule, OpenfundingModule, UploadsModule,RedisCacheModule
+  imports: [CreatorSignupModule, AuthModule, CreatorLoginModule, UserModule, ShinchungModule, HttpModule, OpenfundingModule, UploadsModule,RedisCacheModule, MypageModule
         
   ],
   controllers: [],

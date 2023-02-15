@@ -7,15 +7,22 @@ import * as jwt from 'jsonwebtoken'
 import { ConfigService } from '@nestjs/config';
 import { CreatorLoginDto } from '../creator/creator_dto/creator-login.dto';
 import { User } from '@prisma/client';
+import { JwtPayload } from './payload.dto';
+import { PrismaService } from '../prisma.service';
 // 지갑 바꿨을때 토큰초기화
 
 // 여기서 비밀번호 해시화 해줘야함
 @Injectable()
 export class AuthService {
     // constructor(private userService: UserLoginService, private readonly jwtService: JwtService, private readonly config: ConfigService){}
-    constructor(private userService: UserLoginService, private readonly config: ConfigService){}
+    constructor(
+        private userService: UserLoginService, 
+        private readonly config: ConfigService,
+        private prisma: PrismaService){}
     // 최초 로그인
     // userWallet: string, enterPWD: string
+
+    // 로그인할때 닉네임이랑 user_grade
     async validateUser(loginForm: CreatorLoginDto): Promise<any>{
         console.log("밸리데이터 들어옴 :")
         try {
@@ -56,4 +63,13 @@ export class AuthService {
             throw new UnauthorizedException();
         }
     }
+
+
+    async tokenValidateUser(payload: JwtPayload): Promise<any | undefined>{
+        return await this.prisma.user.findFirst({
+          where: {
+            user_wallet: payload.account,
+          }
+        })
+      }
 }
