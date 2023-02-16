@@ -7,7 +7,7 @@ import { EmailService } from 'src/email/email.service';
 import * as uuid from 'uuid'; 
 import { ConfigService } from '@nestjs/config';
 import { CacheService } from '../../cache/cache.service'
-import { async } from 'rxjs';
+
 
 
 @Injectable()
@@ -43,7 +43,6 @@ export class CreatorSignupService {
             const hasPWD = bcrypt.hashSync(enterPWD, SORT_NUM);
             newsignupForm.user_pwd = hasPWD;
             
-
         // bcrypt.genSalt(SORT_NUM, function(err, salt){
         //     bcrypt.hash(enterPWD, salt, function(err, hash){
         //         console.log("@@@@",hash);

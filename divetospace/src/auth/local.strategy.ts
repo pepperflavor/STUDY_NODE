@@ -17,14 +17,14 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 		super({
 			usernameField: 'user_wallet',
 			passwordField: 'password'
-		}); // { usernameField: 'user_wallet'}
+		}); 
 	}
 
 	// 유저 유효성은 지갑주소(=통상 id와 같은취급), 비밀번호로 검증할 예정임
 	// validate() 는 다음 인자를 받기를 기대한다 (username:string, password: string): any ...
 	// 로그인 api이전에 먼저 실행되어 해당 유저의상태 검사
-	async validate(userWallet: string, userEmail: string ,password: string): Promise<User> {
-		const payload = {user_wallet : userWallet, user_pwd: password, user_email: userEmail}
+	async validate(userWallet: string, password: string): Promise<User> {
+		const payload = {user_wallet : userWallet, user_pwd: password }
 		const user = await this.authService.validateUser(payload);
 		if (!user) {
 			throw new UnauthorizedException();
