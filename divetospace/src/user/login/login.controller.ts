@@ -17,8 +17,8 @@ export class UserLoginController {
         console.log("로그인 시도 ")
         const token = await this.authService.validateUser(userLoginForm); // passport
         const data = await this.authService.postUserinfo(userLoginForm.user_wallet);
-        res.header('Authorization', `Bearer ${token}`);
-        res.json(data);
+        //res.header('Authorization', `Bearer ${token}`);
+        res.json({data: data, token: token });
     }
 
 }

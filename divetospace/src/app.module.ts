@@ -3,7 +3,7 @@ import { UserModule } from './user/user.module';
 import { CreatorModule } from './creator/creator.module';
 // import { AdminModule } from './admin/admin.module';
 
-import { APP_PIPE } from '@nestjs/core';
+import { APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { ValidationPipe, CacheModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UploadsModule } from './file-s3/uploads/uploads.module';
@@ -18,6 +18,7 @@ import { FileS3Module } from './file-s3/file-s3.module';
 //import { AppController } from './app.controller';
 import * as redisStore from 'cache-manager-ioredis';
 import { CacheService } from './cache/cache.service';
+import { JwtAuthGuard } from './auth/jwt-auth';
 
 
 
@@ -39,6 +40,10 @@ import { CacheService } from './cache/cache.service';
       provide : APP_PIPE,
       useClass: ValidationPipe,
     },
+    {
+      provide : APP_GUARD,
+      useClass: JwtAuthGuard
+    }
   ],
 })
 //AppController
