@@ -31,7 +31,6 @@ import { JwtAuthGuard } from './auth/jwt-auth';
       isGlobal: true, // 전체적으로 사용하기 위해
       envFilePath: `${process.env.NODE_ENV}.env`
     }),
-
   ],
   controllers: [],
   providers: [
@@ -40,10 +39,6 @@ import { JwtAuthGuard } from './auth/jwt-auth';
       provide : APP_PIPE,
       useClass: ValidationPipe,
     },
-    {
-      provide : APP_GUARD,
-      useClass: JwtAuthGuard
-    }
   ],
 })
 //AppController
@@ -54,7 +49,12 @@ export class AppModule implements NestModule {
       consumer.apply(LoggerMiddleware).forRoutes('/user_*');
     }
 }
-
+/*
+      {
+      provide : APP_GUARD,
+      useClass: JwtAuthGuard
+    }
+*/
 
 /*
       CacheModule.register({

@@ -11,6 +11,8 @@ import { UploadsModule } from '../file-s3/uploads/uploads.module';
 import { OpenfundingModule } from './openfunding/openfunding.module';
 import { RedisCacheModule } from 'src/cache/cache.module';
 import { MypageModule } from './mypage/mypage.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from '../auth/jwt-auth';
 
 // OpenfundingModule
 @Module({ 
@@ -18,7 +20,9 @@ import { MypageModule } from './mypage/mypage.module';
         
   ],
   controllers: [],
-  providers: []
+  providers: [
+
+  ]
 })
 export class CreatorModule {}
 

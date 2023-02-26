@@ -8,7 +8,7 @@ export class MypageController {
     constructor(private creatorMypageService: MypageService){}
 
     // 마이페이지 펀딩 리스트 뽑아줌
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Get('/:id')
     async creatorMypage(@Param('id') creatorAddress: string){
         //const fundNo = parseInt(id);

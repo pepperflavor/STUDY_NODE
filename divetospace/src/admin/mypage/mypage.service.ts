@@ -93,7 +93,7 @@ export class MypageService {
             properties: {
                 image:{
                     type: "string",
-                    description : shin_description
+                    description : shin_cover
                 },
                 category:{
                     type: "string",
@@ -142,12 +142,15 @@ export class MypageService {
         const temptwo = await this.prisma.user.findFirst({
             where: {
                 user_wallet: wallet
+            },
+            select:{
+                user_email: true,
             }
         })
 
         console.log("@@@ temptwo : ",temptwo);
         
-        const email = temptwo.user_email
+        const email = temptwo.user_email;
         console.log("@@@ temptwo : ", temptwo) //데이터 잘나온다.
         
         // 메일로 알려주기

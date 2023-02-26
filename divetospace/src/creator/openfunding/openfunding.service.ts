@@ -28,7 +28,7 @@ export class OpenfundingService {
                 shin_no : shinNo,
             },
             data: {
-                fund_state: 2,
+                fund_state: 1,
             }
         })
         // funding 테이블 fund_no로 변경함
@@ -102,7 +102,7 @@ export class OpenfundingService {
       // 앞단에 던져줄 데이터
       // 토큰아이디(fund_no), 발행량, 총금액, 메타데이터url, 기간
       const sendData = {
-          tokenId : shinNo,
+          tokenId : tokenId.fund_no,
           balance : shin_nft_totalbalance,
           totalPrice : shin_amount,
           opendate : shin_period,

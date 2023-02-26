@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import Mail from 'nodemailer/lib/mailer';
 import * as nodemailer from 'nodemailer'
 import { ConfigService } from '@nestjs/config';
+import * as AWS from 'aws-sdk';
+
 
 interface EmailOptions {
     to: string;
@@ -87,6 +89,31 @@ export class EmailService {
 
         }
     }
+
+    async awsEmail(address: string, signupVerifyToken: string, option: string){
+        const transfer = nodemailer.createTransport({
+            SES: new AWS.SES({
+                apiVersion: '2010-12-01'
+            })
+        })
+
+        const baseURL = 'http://localhost:3001';
+        const url2 ='http://ec2-3-38-20-36.ap-northeast-2.compute.amazonaws.com:3001'
+
+        const url = `${baseURL}/creator/result?signupVerifyToken=${signupVerifyToken}`;
+        this.transporter.sendMail({
+            from: this.config.get('MAILER'),
+            to: address,
+            html: `
+            가입 확인 버튼을 누르시면 가입인증이 완료됩니다</br>
+            <form action=${url} method='GET'>
+            <a>${option}</a>
+            <button>가입확인</button>
+            </form>
+            `
+        })
+    }
+
 }
 
 /*

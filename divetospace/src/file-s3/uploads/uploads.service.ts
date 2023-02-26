@@ -15,8 +15,11 @@ export class UploadsService {
         if(!file){
             throw new BadRequestException('파일이 존재하지 않습니다.');
         }
+        const imgurl = file.location;
+
+
         // 저장주소만 리턴
-        return file.location;
+        return decodeURI(imgurl);
     }
 
     // 음악파일 저장
