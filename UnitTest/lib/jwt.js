@@ -1,15 +1,41 @@
-const crypto = require('crypto')
-
-class JWT{
-    constructor({crypto}){
-        this.crypto = crypto;
+class JWT {
+    constructor({ crypto }) {
+        this.crypto = crypto
     }
 
-    encode(obj){
-        // const buf = Buffer.from(JSON.stringify(obj)).toString("base64").replace(/[=]/g, ""); // buffer.from()의 매개변수는 string이어야 함
+    sign(data, options = {}) {
+        const header = this.encode({ tpy: "JWT", alg: "HS256" }) //base64url
+        const payload = this.encode({ ...data, ...options }) //base64url
+        const signature = this.createSignature([header, payload])
+
+        // return `${header}.${payload}.${signature}`
+        return [header, payload, signature].join(".")
+    }
+
+    // token:string
+    verify(token, salt) {
+        const [header, payload, signature] = token.split(".")
+        const newSignature = this.createSignature([header, payload], salt)
+        if (newSignature !== signature) {
+            throw new Error("토큰이 이상함...누가 변조함!")
+        }
+
+        return this.decode(payload)
+    }
+
+    encode(obj) {
         return Buffer.from(JSON.stringify(obj)).toString("base64").replace(/[=]/g, "")
     }
 
+    decode(base64) {
+        return JSON.parse(Buffer.from(base64, "base64").toString("utf-8"))
+    }
+
+    createSignature(base64urls, salt = "web7722") {
+        // header.payload .join
+        const data = base64urls.join(".")
+        return this.crypto.createHmac("sha256", salt).update(data).digest("base64").replace(/[=]/g, "")
+    }
 }
 
-module.exports = JWT
+module.exports = JWT;
